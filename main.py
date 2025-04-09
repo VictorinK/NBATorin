@@ -17,16 +17,13 @@ def index():
 @app.route('/search', methods=['POST'])
 def search():
   if request.method == 'POST':
-    player_name = request.form['query']
-    current_player = nbacomm.Player(player_name)
-    #convert gamelog to json
-    player_info = current_player.get_common_player_info()
-    game_log = current_player.get_game_log_data_with_nothing()
-    return render_template('player_stats.html', gameLog = game_log, playerInfo = player_info)
+    current_player = nbacomm.Player(request.form['query'])
+    current_season = request.form['season']
+    #convert game_log to json
+    game_log = current_player.get_game_log_data_with_nothing(current_season)
+    return render_template('player_stats.html', gameLog = game_log, playerInfo = current_player.get_common_player_info())
   return 'Search page'
 
-
-  
 
 
 if __name__ == '__main__':

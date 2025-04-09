@@ -37,48 +37,7 @@ class Player:
       Returns:
           dict: A dictionary containing the game log data for the specified player.
       """
-  def get_game_log_data(self,gl_season,ngames,gl_parameters):
-
-    gamelog_from_player = playergamelog.PlayerGameLog(player_id=self.player_id,
-      season=gl_season)
-    #collects dataframe (game_date,pts,matchup and etc) of all games into player_log variable
-    player_log = gamelog_from_player.get_data_frames()[0]
-    gl_result_dict = {}
-    gl_report_options = ['GAME_DATE', 'MATCHUP', 'WL'] + gl_parameters.split("+")
-    np_result_arr  = np.array(player_log.loc[0:ngames, gl_report_options])
-    #print(np_result_arr)
-    for options in gl_report_options:
-      gl_result_dict[options] = []
-    for i in range(0, len(gl_report_options)):
-      for j in range(0, len(np_result_arr)):
-        gl_result_dict[gl_report_options[i]].append(np_result_arr[j][i])
-    #print(gl_result_dict)
-    return gl_result_dict 
-
-    """
-      This function returns the game log data for the specified player.
-      Args:  gl_paremeters = the OptionS to  which data choose to be display ex. PTS, AST, REB, etc.
-  
-      Returns:
-          dict: A dictionary containing the game log data for the specified player.
-      """
-  def get_game_log_data_with_parameters(self,gl_parameters):
-
-    gamelog_from_player = playergamelog.PlayerGameLog(player_id=self.player_id,
-      season="2023")
-    #collects dataframe (game_date,pts,matchup and etc) of all games into player_log variable
-    player_log = gamelog_from_player.get_data_frames()[0]
-    gl_result_dict = {}
-    gl_report_options = ['GAME_DATE', 'MATCHUP', 'WL'] + gl_parameters.split("+")
-    np_result_arr  = np.array(player_log.loc[0:6, gl_report_options])
-    #print(np_result_arr)
-    for options in gl_report_options:
-      gl_result_dict[options] = []
-    for i in range(0, len(gl_report_options)):
-      for j in range(0, len(np_result_arr)):
-        gl_result_dict[gl_report_options[i]].append(np_result_arr[j][i])
-    #print(gl_result_dict)
-    return gl_result_dict 
+   
     """
     This function returns the game log data for the specified player.
     Args:  gl_paremeters = the OptionS to  which data choose to be display ex. PTS, AST, REB, etc.
@@ -86,10 +45,10 @@ class Player:
     Returns:
        dict: A dictionary containing the game log data for the specified player.
     """
-  def get_game_log_data_with_nothing(self):
+  def get_game_log_data_with_nothing(self,season):
 
       gamelog_from_player = playergamelog.PlayerGameLog(player_id=self.player_id,
-        season="2023")
+        season=season)
       #collects dataframe (game_date,pts,matchup and etc) of all games into player_log variable
       player_log = gamelog_from_player.get_data_frames()[0]
       gl_result_dict = {}
